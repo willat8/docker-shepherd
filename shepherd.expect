@@ -2,6 +2,9 @@
 
 set timeout -1
 spawn perl /tmp/shepherd
-expect -re {^Enter region code: .+}
-puts "73"
+expect -re {(?n)^Enter region code: .*}
+send "73\n"
+expect -re {(?n)^Would you like Guided channel selection\? .*}
+send "no\n"
+expect "Next"
 
