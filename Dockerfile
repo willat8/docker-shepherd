@@ -30,7 +30,7 @@ RUN groupadd shepherd \
  && useradd -g shepherd -m -s /bin/bash shepherd \
  && ln -sfv /usr/share/zoneinfo/Australia/Sydney /etc/localtime \
  # Set SUID on crond so it can be started by the shepherd user
- && chmod u+s /sbin/crond
+ && chmod u+s /usr/sbin/cron
 
 USER shepherd
 
