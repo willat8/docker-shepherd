@@ -45,5 +45,8 @@ expect -re {(?n)^Create configuration file\? .*} { send "yes\n" }
 
 expect -re {(?n)^Create symlink \? .*} { send "no\n" }
 
-expect "#"
+expect -re {(?n)^Would you like Shepherd to auto-configure MythTV\? .*} { send "no\n" }
+
+# Channel icons
+expect -re {(?n)^Do you wish to do this now\? .*} { send "no\n" }
 
