@@ -23,7 +23,7 @@ RUN apt-get update \
     libjson-maybexs-perl \
     libdbd-mysql-perl \
     expect \
-    anacron \
+    cron \
  && rm -rf /var/lib/apt/lists/*
 
 RUN groupadd shepherd \
@@ -36,7 +36,8 @@ COPY shepherd shepherd.expect /tmp/
 
 WORKDIR /home/shepherd
 
-RUN /tmp/shepherd.expect
+RUN /tmp/shepherd.expect \
+ && $(pwd)/.shepherd/applications/shepherd/shepherd --component-set augment_timezone:timeoffset=Auto
 
 ENTRYPOINT ["crond"]
 
