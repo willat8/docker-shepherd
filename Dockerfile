@@ -28,16 +28,22 @@ RUN apt-get update \
 
 RUN groupadd shepherd \
  && useradd -g shepherd -m -s /bin/bash shepherd \
- && ln -sfv /usr/share/zoneinfo/Australia/Sydney /etc/localtime
+ && ln -sfv /usr/share/zoneinfo/Australia/Sydney /etc/localtime \
+ # Set SUID on crond so it can be started by the shepherd user
+ && chmod u+s /sbin/crond
 
 USER shepherd
 
-COPY shepherd shepherd.expect /tmp/
+COPY shepherd shepherd.expect entrypoint.sh /tmp/
 
 WORKDIR /home/shepherd
 
 RUN /tmp/shepherd.expect \
- && $(pwd)/.shepherd/applications/shepherd/shepherd --component-set augment_timezone:timeoffset=Auto
+ # Use the full path to avoid a warning
+ && $(pwd)/.shepherd/applications/shepherd/shepherd --component-set augment_timezone:timeoffset=Auto \
+ # Create the log file so we can establish a tail
+ && mkdir -p .shepherd/log \
+ && touch .shepherd/log/shepherd.log
 
-ENTRYPOINT ["crond"]
+ENTRYPOINT ["/tmp/entrypoint.sh"]
 
