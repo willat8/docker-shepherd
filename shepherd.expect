@@ -32,11 +32,14 @@ expect {
   -re {"SBSVICELAND" \(new\).*} { send "\n" ; exp_continue }
   -re {"SBSVICELANDHD" \(new\).*} { send "\n" ; exp_continue }
   -re {"Seven" \(new\).*} { send "\n" ; exp_continue }
+  # Move on once at the next question after channel selection
+  -re {(?n)^Do you wish to include PayTV .*} { send "no\n" }
   # The default is to reject other channels
   -re {".*" \(new\).*} { send "n\n" ; exp_continue }
 }
 
-expect -re {(?n)^Do you wish to include PayTV .*} { send "no\n" }
+# Transition from grabber
+expect -re {(?n)^Select one: .*} { send "0\n" }
 
 expect "#"
 
