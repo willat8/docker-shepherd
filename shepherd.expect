@@ -41,5 +41,9 @@ expect {
 # Transition from grabber
 expect -re {(?n)^Select one: .*} { send "0\n" }
 
+expect -re {(?n)^Create configuration file\? .*} { send "yes\n" }
+
+expect -re {(?n)^Create symlink \? .*} { send "no\n" }
+
 expect "#"
 
