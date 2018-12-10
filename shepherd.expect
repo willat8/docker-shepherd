@@ -1,0 +1,7 @@
+#!/bin/env expect
+
+set timeout -1
+spawn perl /tmp/shepherd
+expect -re {^Enter region code: .+}
+puts "73"
+

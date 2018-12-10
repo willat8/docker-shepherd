@@ -2,7 +2,7 @@ FROM ubuntu:devel
 
 RUN apt-get update \
  # As per https://github.com/ShephedProject/shepherd/wiki/Installation#PerlDependencies
- && apt-get install -y --no-install-recommends \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     libxml-simple-perl \
     libalgorithm-diff-perl \
     libgetopt-mixed-perl \
@@ -22,12 +22,21 @@ RUN apt-get update \
     libobject-tiny-perl \
     libjson-maybexs-perl \
     libdbd-mysql-perl \
+    expect \
+    anacron \
  && rm -rf /var/lib/apt/lists/*
 
 RUN groupadd shepherd \
- && useradd -g shepherd -m -s /bin/bash shepherd
+ && useradd -g shepherd -m -s /bin/bash shepherd \
+ && ln -sfv /usr/share/zoneinfo/Australia/Sydney /etc/localtime
 
 USER shepherd
 
-COPY shepherd /tmp
+COPY shepherd shepherd.expect /tmp/
+
+WORKDIR /home/shepherd
+
+RUN /tmp/shepherd.expect
+
+ENTRYPOINT ["crond"]
 
