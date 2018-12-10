@@ -6,5 +6,6 @@ expect -re {(?n)^Enter region code: .*}
 send "73\n"
 expect -re {(?n)^Would you like Guided channel selection\? .*}
 send "no\n"
-expect "Next"
+expect -re {"10" \(new\).*} {send "\n"}
+expect "#"
 
