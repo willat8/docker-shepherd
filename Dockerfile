@@ -24,6 +24,7 @@ RUN apt-get update \
     libdbd-mysql-perl \
     expect \
     cron \
+    dc \
  && rm -rf /var/lib/apt/lists/*
 
 RUN groupadd shepherd \
