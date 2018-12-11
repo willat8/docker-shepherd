@@ -31,17 +31,18 @@ RUN groupadd shepherd \
  && useradd -g shepherd -m -s /bin/bash shepherd \
  && ln -sfv /usr/share/zoneinfo/Australia/Sydney /etc/localtime \
  # Set SUID on crond so it can be started by the shepherd user
- && chmod u+s /usr/sbin/cron
+ && chmod u+s /usr/sbin/cron \
+ && install -dm 755 -o shepherd -g shepherd /shepherd_output
+
+VOLUME /shepherd_output
 
 USER shepherd
 
-COPY shepherd shepherd.expect entrypoint.sh nolog_shepherd.sh /tmp/
+COPY shepherd shepherd.expect entrypoint.sh /
 
-WORKDIR /home/shepherd
-
-RUN /tmp/shepherd.expect \
+RUN /shepherd.expect \
  # Use the full path to avoid a warning
- && $(pwd)/.shepherd/applications/shepherd/shepherd --component-set augment_timezone:timeoffset=Auto
+ && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set augment_timezone:timeoffset=Auto
 
-ENTRYPOINT ["/tmp/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 
