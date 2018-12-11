@@ -35,7 +35,7 @@ RUN groupadd shepherd \
 
 USER shepherd
 
-COPY shepherd shepherd.expect entrypoint.sh /tmp/
+COPY shepherd shepherd.expect entrypoint.sh nolog_shepherd.sh /tmp/
 
 WORKDIR /home/shepherd
 
