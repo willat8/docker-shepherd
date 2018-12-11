@@ -9,6 +9,9 @@ expect -re {(?n)^Enter region code: .*} { send "73\n" }
 expect -re {(?n)^Would you like Guided channel selection\? .*} { send "no\n" }
 
 expect {
+  # Move on once at the next question after channel selection
+  -re {(?n)^Do you wish to include PayTV .*} { send "no\n" }
+
   -re {"10" \(new\).*} { send "\n" ; exp_continue }
   -re {"10 Boss" \(new\).*} { send "\n" ; exp_continue }
   -re {"10 HD" \(new\).*} { send "\n" ; exp_continue }
@@ -32,10 +35,9 @@ expect {
   -re {"SBSVICELAND" \(new\).*} { send "\n" ; exp_continue }
   -re {"SBSVICELANDHD" \(new\).*} { send "\n" ; exp_continue }
   -re {"Seven" \(new\).*} { send "\n" ; exp_continue }
-  # Move on once at the next question after channel selection
-  -re {(?n)^Do you wish to include PayTV .*} { send "no\n" }
+
   # The default is to reject other channels
-  -re {".*" \(new\).*} { send "n\n" ; exp_continue }
+  -re {"[^"]*" \(new\).*} { send "n\n" ; exp_continue }
 }
 
 # Transition from grabber
