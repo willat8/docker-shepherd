@@ -1,8 +1,6 @@
 #!/bin/bash
 
-echo "$(dc -e "$(date +"%M") 2 + 60 % p") * * * * /home/shepherd/.shepherd/applications/shepherd/shepherd" | crontab -
+echo "$(dc -e "$(date +"%M") 2 + 60 % p") * * * * sh -c '/home/shepherd/.shepherd/applications/shepherd/shepherd --nolog > /proc/self/fd/1 2>/proc/self/fd/2'" | crontab -
 
-cron
-
-exec tail -f /home/shepherd/.shepherd/log/shepherd.log
+exec cron -f
 

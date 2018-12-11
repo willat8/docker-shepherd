@@ -41,10 +41,7 @@ WORKDIR /home/shepherd
 
 RUN /tmp/shepherd.expect \
  # Use the full path to avoid a warning
- && $(pwd)/.shepherd/applications/shepherd/shepherd --component-set augment_timezone:timeoffset=Auto \
- # Create the log file so we can establish a tail
- && mkdir -p .shepherd/log \
- && touch .shepherd/log/shepherd.log
+ && $(pwd)/.shepherd/applications/shepherd/shepherd --component-set augment_timezone:timeoffset=Auto
 
 ENTRYPOINT ["/tmp/entrypoint.sh"]
 
