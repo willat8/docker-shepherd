@@ -13,7 +13,7 @@ expect {
   -re {(?n)^Do you wish to include PayTV .*} { send "no\n" }
 
   -re {"10" \(new\).*} { send "\n" ; exp_continue }
-  -re {"10 Boss" \(new\).*} { send "\n" ; exp_continue }
+  -re {"10 Bold" \(new\).*} { send "\n" ; exp_continue }
   -re {"10 HD" \(new\).*} { send "\n" ; exp_continue }
   -re {"10 Peach" \(new\).*} { send "\n" ; exp_continue }
   -re {"7flix" \(new\).*} { send "\n" ; exp_continue }
