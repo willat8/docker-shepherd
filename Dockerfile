@@ -43,7 +43,7 @@ COPY shepherd shepherd.expect entrypoint.sh /
 RUN /shepherd.expect \
  # Use the full path to avoid a warning
  && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set augment_timezone:timeoffset=Auto \
- && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set shepherd:output=/shepherd_output/output.xmltv:nolog
+ && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set shepherd:output=/shepherd_output/output.xmltv:nolog:noautorefresh
 
 ENTRYPOINT ["/entrypoint.sh"]
 
