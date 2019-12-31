@@ -22,6 +22,7 @@ RUN apt-get update \
     libobject-tiny-perl \
     libjson-maybexs-perl \
     libdbd-mysql-perl \
+    liblocale-codes-perl \
     expect \
     cron \
     dc \
