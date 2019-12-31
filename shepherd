@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 our $progname = 'shepherd';
-my $version = '1.9.13';
+my $version = '1.9.12';
 
 # tv_grab_au
 # "Shepherd"
@@ -3108,18 +3108,13 @@ sub my_die {
 
     # check if we are in an eval()
     if ($^S) {
-        printf STDERR "* Caught a die() within eval{} from file $file line $line\n";
-	    if ($arg){
-		    print STDERR $arg;
-	    } else {
-		    print STDERR join("",@rest)
-	    }
+	printf STDERR "* Caught a die() within eval{} from file $file line $line\n";
     } else {
-		printf STDERR "\nDIE: line %d in file %s\n",$line,$file;
+	    printf STDERR "\nDIE: line %d in file %s\n",$line,$file;
 	    if ($arg) {
-			CORE::die($arg,@rest);
+		CORE::die($arg,@rest);
 	    } else {
-			CORE::die(join("",@rest));
+		CORE::die(join("",@rest));
 	    }
     }
 }
