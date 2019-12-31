@@ -3,6 +3,7 @@ FROM ubuntu:devel
 RUN apt-get update \
  # As per https://github.com/ShephedProject/shepherd/wiki/Installation#PerlDependencies
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    perl-modules \
     libxml-simple-perl \
     libalgorithm-diff-perl \
     libgetopt-mixed-perl \
