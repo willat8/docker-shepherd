@@ -1,4 +1,4 @@
-FROM ubuntu:devel
+FROM ubuntu:focal
 
 RUN apt-get update \
  # As per https://github.com/ShephedProject/shepherd/wiki/Installation#PerlDependencies
