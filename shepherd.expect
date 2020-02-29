@@ -12,7 +12,6 @@ expect {
   # Move on once at the next question after channel selection
   -re {(?n)^Do you wish to include PayTV .*} { send "no\n" }
 
-  -re {"10" \(new\).*} { send "\n" ; exp_continue }
   -re {"10 Bold" \(new\).*} { send "\n" ; exp_continue }
   -re {"10 HD" \(new\).*} { send "\n" ; exp_continue }
   -re {"10 Peach" \(new\).*} { send "\n" ; exp_continue }
@@ -20,21 +19,18 @@ expect {
   -re {"7HD" \(new\).*} { send "\n" ; exp_continue }
   -re {"7mate" \(new\).*} { send "\n" ; exp_continue }
   -re {"7TWO" \(new\).*} { send "\n" ; exp_continue }
-  -re {"9Gem" \(new\).*} { send "\n" ; exp_continue }
+  -re {"9Gem HD" \(new\).*} { send "\n" ; exp_continue }
   -re {"9Go!" \(new\).*} { send "\n" ; exp_continue }
   -re {"9HD" \(new\).*} { send "\n" ; exp_continue }
   -re {"9Life" \(new\).*} { send "\n" ; exp_continue }
-  -re {"ABC" \(new\).*} { send "\n" ; exp_continue }
   -re {"ABC COMEDY/ABC KIDS" \(new\).*} { send "\n" ; exp_continue }
   -re {"ABC HD" \(new\).*} { send "\n" ; exp_continue }
   -re {"ABCME" \(new\).*} { send "\n" ; exp_continue }
   -re {"ABCNEWS" \(new\).*} { send "\n" ; exp_continue }
-  -re {"Nine" \(new\).*} { send "\n" ; exp_continue }
-  -re {"SBS" \(new\).*} { send "\n" ; exp_continue }
+  -re {"SBS Food" \(new\).*} { send "\n" ; exp_continue }
   -re {"SBS HD" \(new\).*} { send "\n" ; exp_continue }
-  -re {"SBSVICELAND" \(new\).*} { send "\n" ; exp_continue }
+  -re {"SBS World Movies" \(new\).*} { send "\n" ; exp_continue }
   -re {"SBSVICELANDHD" \(new\).*} { send "\n" ; exp_continue }
-  -re {"Seven" \(new\).*} { send "\n" ; exp_continue }
 
   # The default is to reject other channels
   -re {"[^"]*" \(new\).*} { send "n\n" ; exp_continue }
