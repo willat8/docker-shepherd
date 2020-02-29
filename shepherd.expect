@@ -17,7 +17,7 @@ expect {
   -re {"10 Peach" \(new\).*} { send "\n" ; exp_continue }
   -re {"7flix" \(new\).*} { send "\n" ; exp_continue }
   -re {"7HD" \(new\).*} { send "\n" ; exp_continue }
-  -re {"7mate" \(new\).*} { send "\n" ; exp_continue }
+  -re {"7mate HD" \(new\).*} { send "\n" ; exp_continue }
   -re {"7TWO" \(new\).*} { send "\n" ; exp_continue }
   -re {"9Gem HD" \(new\).*} { send "\n" ; exp_continue }
   -re {"9Go!" \(new\).*} { send "\n" ; exp_continue }
