@@ -1,7 +1,11 @@
-FROM ubuntu:eoan
+FROM ubuntu:devel
 
 RUN apt-get update \
  # As per https://github.com/ShephedProject/shepherd/wiki/Installation#PerlDependencies
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    software-properties-common \
+ # Contains packages that have been removed from the latest Ubuntu releases
+ && add-apt-repository -y ppa:willat8/shepherd \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     libxml-simple-perl \
     libalgorithm-diff-perl \
