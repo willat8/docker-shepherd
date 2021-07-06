@@ -1,0 +1,7 @@
+#!/bin/bash
+
+docker run --privileged --rm -v "$(pwd)":"$(pwd)" -w "$(pwd)" -d --name dind docker:dind && docker logs -f dind 2>&1 | fgrep -m1 'API listen on /var/run/docker.sock'
+docker exec dind docker build -f "${DOCKERFILE_PATH:-Dockerfile}" -t "$IMAGE_NAME" .
+docker exec dind docker save "$IMAGE_NAME" | docker load
+docker stop dind
+
