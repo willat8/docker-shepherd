@@ -45,13 +45,13 @@ USER shepherd
 
 COPY shepherd shepherd.expect entrypoint.sh /
 
+# Temporary fix for 10 SHAKE until it's updated in the source
+RUN sed -ri 's/10 Shake/10 SHAKE/' /home/shepherd/.shepherd/references/channel_list/channel_list
+
 RUN /shepherd.expect \
  # Use the full path to avoid a warning
  && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set augment_timezone:timeoffset=Auto \
  && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set shepherd:output=/shepherd_output/output.xmltv:nolog:noautorefresh
-
-# Temporary fix for 10 SHAKE until it's updated in the source
-RUN sed -ri 's/10 Shake/10 SHAKE/' /home/shepherd/.shepherd/references/channel_list/channel_list
 
 ENTRYPOINT ["/entrypoint.sh"]
 
