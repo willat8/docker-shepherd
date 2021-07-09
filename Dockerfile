@@ -51,7 +51,7 @@ RUN /shepherd.expect \
  && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set shepherd:output=/shepherd_output/output.xmltv:nolog:noautorefresh
 
 # Temporary fix for 10 SHAKE until it's updated in the source
-RUN sed -ri 's/10 Shake/10 SHAKE/' /home/shepherd/.shepherd/references/channel_list/channel_list
+RUN sed -ri 's/10 Shake/10 SHAKE/' /home/shepherd/.shepherd/references/channel_list/channel_list /home/shepherd/.shepherd/channels.conf
 
 ENTRYPOINT ["/entrypoint.sh"]
 
