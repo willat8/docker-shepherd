@@ -1,6 +1,7 @@
+# syntax = docker/dockerfile:1.3-labs
 FROM ubuntu:devel
 
-RUN apt-get update \
+RUN --security=insecure apt-get update \
  # As per https://github.com/ShephedProject/shepherd/wiki/Installation#PerlDependencies
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     gpg-agent software-properties-common \
