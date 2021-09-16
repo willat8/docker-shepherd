@@ -1,9 +1,6 @@
 #!/bin/bash
 
 # As per https://docs.docker.com/engine/reference/commandline/buildx_build/#allow
-# and https://github.com/docker/buildx/issues/495#issuecomment-761562905
-docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-docker buildx create --use --name insecure-builder --buildkitd-flags '--allow-insecure-entitlement security.insecure' --driver docker-container
-docker buildx inspect --bootstrap
+docker buildx create --use --name insecure-builder --buildkitd-flags '--allow-insecure-entitlement security.insecure'
 docker buildx build --allow security.insecure --load --platform linux/amd64,linux/arm64 -f "${DOCKERFILE_PATH:-Dockerfile}" -t "$IMAGE_NAME" .
 
