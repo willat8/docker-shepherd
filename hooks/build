@@ -1,8 +1,5 @@
 #!/bin/bash
 
-docker run --privileged --rm tonistiigi/binfmt --uninstall qemu-aarch64
-docker run --privileged --rm tonistiigi/binfmt --install arm64
-
 # As per https://docs.docker.com/engine/reference/commandline/buildx_build/#allow
 docker buildx create --use --name insecure-builder --buildkitd-flags '--allow-insecure-entitlement security.insecure'
 docker buildx build --allow security.insecure --load --platform linux/amd64,linux/arm64 -f "${DOCKERFILE_PATH:-Dockerfile}" -t "$IMAGE_NAME" .
