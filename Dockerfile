@@ -1,6 +1,10 @@
 # syntax = docker/dockerfile:1.3-labs
 FROM ubuntu:devel
 
+RUN ln -s /usr/bin/dpkg-split /usr/sbin/dpkg-split \
+ && ln -s /usr/bin/dpkg-deb /usr/sbin/dpkg-deb \
+ && ln -s /bin/tar /usr/sbin/tar
+
 RUN --security=insecure apt-get update \
  # As per https://github.com/ShephedProject/shepherd/wiki/Installation#PerlDependencies
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
