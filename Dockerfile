@@ -6,6 +6,8 @@ RUN ln -s /usr/bin/dpkg-split /usr/sbin/dpkg-split \
  && ln -s /usr/bin/tar /usr/sbin/tar \
  && ln -s /usr/bin/rm /usr/sbin/rm
 
+RUN --security=insecure dpkg -L tar
+
 RUN --security=insecure apt-get update \
  # As per https://github.com/ShephedProject/shepherd/wiki/Installation#PerlDependencies
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
