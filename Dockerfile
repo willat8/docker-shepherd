@@ -3,7 +3,7 @@ FROM ubuntu:devel
 
 COPY qemu-aarch64-static /usr/bin
 
-RUN --security=insecure apt-get update \
+RUN apt-get update \
  # As per https://github.com/ShephedProject/shepherd/wiki/Installation#PerlDependencies
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     gpg-agent software-properties-common \
@@ -48,7 +48,7 @@ USER shepherd
 
 COPY shepherd shepherd.expect entrypoint.sh /
 
-RUN --security=insecure /shepherd.expect \
+RUN /shepherd.expect \
  # Use the full path to avoid a warning
  && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set augment_timezone:timeoffset=Auto \
  && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set shepherd:output=/shepherd_output/output.xmltv:nolog:noautorefresh
