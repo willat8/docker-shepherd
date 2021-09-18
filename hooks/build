@@ -4,7 +4,7 @@ curl -LO https://github.com/multiarch/qemu-user-static/releases/download/v6.1.0-
 chmod +x qemu-aarch64-static
 docker run --rm --privileged multiarch/qemu-user-static:register --reset
 
-cat /proc/sys/fs/binfmt_misc/qemu-*
+ls -la /proc/sys/fs/binfmt_misc
 
 # As per https://docs.docker.com/engine/reference/commandline/buildx_build/#allow
 docker buildx create --use --name insecure-builder --buildkitd-flags '--allow-insecure-entitlement security.insecure'
