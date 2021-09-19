@@ -9,5 +9,5 @@ docker buildx build --platform linux/arm64 -f "${DOCKERFILE_PATH:-Dockerfile}.ar
 
 # As per https://docs.docker.com/engine/reference/commandline/buildx_build/#allow
 docker buildx create --use --name insecure-builder --buildkitd-flags '--allow-insecure-entitlement security.insecure'
-docker buildx build --allow security.insecure --output push-by-digest=true -f "${DOCKERFILE_PATH:-Dockerfile}" -t "$IMAGE_NAME" .
+docker buildx build --allow security.insecure --output type=image,name=$IMAGE_NAME,push=true,push-by-digest=true -f "${DOCKERFILE_PATH:-Dockerfile}" -t "$IMAGE_NAME" .
 
