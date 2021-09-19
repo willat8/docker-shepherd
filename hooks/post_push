@@ -1,4 +1,4 @@
 #!/bin/bash
 
-#docker buildx imagetools create --append willat8/shepherd 
+docker buildx imagetools create --append -t willat8/shepherd:latest willat8/shepherd@sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
 
