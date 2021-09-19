@@ -1,0 +1,4 @@
+#!/bin/bash
+
+#docker buildx imagetools create --append willat8/shepherd 
+
