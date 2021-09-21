@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker buildx imagetools create --append -t willat8/shepherd:latest "willat8/shepherd@$(<iid.txt)"
+docker buildx imagetools create --append -t "$IMAGE_NAME" "${DOCKER_REPO}@$(<iid.txt)"
 
