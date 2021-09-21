@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker buildx imagetools create --append -t willat8/shepherd:latest "willat8/shepherd@$(jq '."containerimage.digest"') <metadata.json)"
+docker buildx imagetools create --append -t willat8/shepherd:latest "willat8/shepherd@$(<iid.txt)"
 

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-apt-get update && apt-get install -y --no-install-recommends jq
-
 curl -LO https://github.com/multiarch/qemu-user-static/releases/download/v6.1.0-5/qemu-aarch64-static
 chmod +x qemu-aarch64-static
 docker run --rm --privileged multiarch/qemu-user-static:register --reset
@@ -10,5 +8,5 @@ docker buildx create --use --name arm64-builder --driver docker
 docker buildx build --platform linux/arm64 -f "${DOCKERFILE_PATH:-Dockerfile}.arm64" -t "$IMAGE_NAME" .
 
 docker buildx create --use --name insecure-builder --buildkitd-flags '--allow-insecure-entitlement security.insecure'
-docker buildx build --allow security.insecure --output type=image,name=willat8/shepherd,push-by-digest=true,push=true --metadata-file metadata.json -f "${DOCKERFILE_PATH:-Dockerfile}" .
+docker buildx build --allow security.insecure --output type=image,name=willat8/shepherd,push-by-digest=true,push=true --iidfile iid.txt -f "${DOCKERFILE_PATH:-Dockerfile}" .
 
