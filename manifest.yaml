@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shepherd-pv-claim
+spec:
+  storageClassName: nfs-client
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+
+---
+
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: shepherd
+spec:
+  schedule: "36 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+            - name: shepherd-pv-storage
+              persistentVolumeClaim:
+                claimName: shepherd-pv-claim
+          containers:
+          - name: shepherd
+            image: willat8/shepherd
+            imagePullPolicy: IfNotPresent
+#            volumeMounts:
+#              - mountPath: "/home/shepherd/.shepherd/output.xmltv"
+#                name: shepherd-pv-storage
+#                subPath: output.xmltv
+#              - mountPath: "/home/shepherd/.shepherd/shepherd.conf"
+#                name: shepherd-pv-storage
+#                subPath: shepherd.conf
+          restartPolicy: Never
+
