@@ -29,16 +29,11 @@ RUN --security=insecure apt-get update \
     libdbd-mysql-perl \
     liblocale-codes-perl \
     expect \
-    cron \
-    dc \
  && rm -rf /var/lib/apt/lists/*
 
 RUN groupadd shepherd \
  && useradd -g shepherd -m -s /bin/bash shepherd \
- && ln -sfv /usr/share/zoneinfo/Australia/Sydney /etc/localtime \
- # Set suid on cron so it can be started by the shepherd user
- && chmod u+s /usr/sbin/cron \
- && install -dm 755 -o shepherd -g shepherd /shepherd_output
+ && ln -sfv /usr/share/zoneinfo/Australia/Sydney /etc/localtime
 
 USER shepherd
 
