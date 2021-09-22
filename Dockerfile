@@ -40,16 +40,14 @@ RUN groupadd shepherd \
  && chmod u+s /usr/sbin/cron \
  && install -dm 755 -o shepherd -g shepherd /shepherd_output
 
-VOLUME /shepherd_output
-
 USER shepherd
 
-COPY shepherd shepherd.expect entrypoint.sh /
+COPY shepherd shepherd.expect /
 
 RUN --security=insecure /shepherd.expect \
  # Use the full path to avoid a warning
  && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set augment_timezone:timeoffset=Auto \
- && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set shepherd:output=/shepherd_output/output.xmltv:nolog:noautorefresh
+ && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set shepherd:nolog:noautorefresh
 
 # Temporary fix for 10 SHAKE until it's updated in the source
 RUN sed -ri 's/10 Shake/10 SHAKE/' /home/shepherd/.shepherd/references/channel_list/channel_list /home/shepherd/.shepherd/channels.conf
