@@ -54,5 +54,5 @@ RUN --security=insecure /shepherd.expect \
 # Temporary fix for 10 SHAKE until it's updated in the source
 RUN sed -ri 's/10 Shake/10 SHAKE/' /home/shepherd/.shepherd/references/channel_list/channel_list /home/shepherd/.shepherd/channels.conf
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/home/shepherd/.shepherd/applications/shepherd/shepherd"]
 
