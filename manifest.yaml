@@ -17,8 +17,9 @@ kind: CronJob
 metadata:
   name: shepherd
 spec:
-  schedule: "36 * * * *"
+  schedule: "27 * * * *"
   concurrencyPolicy: Forbid
+  suspend: false
   jobTemplate:
     spec:
       template:
@@ -30,13 +31,13 @@ spec:
           containers:
           - name: shepherd
             image: willat8/shepherd
-            imagePullPolicy: IfNotPresent
-#            volumeMounts:
-#              - mountPath: "/home/shepherd/.shepherd/output.xmltv"
-#                name: shepherd-pv-storage
-#                subPath: output.xmltv
-#              - mountPath: "/home/shepherd/.shepherd/shepherd.conf"
-#                name: shepherd-pv-storage
-#                subPath: shepherd.conf
+            imagePullPolicy: Always
+            volumeMounts:
+              - mountPath: "/home/shepherd/.shepherd/output.xmltv"
+                name: shepherd-pv-storage
+                subPath: output.xmltv
+              - mountPath: "/home/shepherd/.shepherd/shepherd.conf"
+                name: shepherd-pv-storage
+                subPath: shepherd.conf
           restartPolicy: Never
 
