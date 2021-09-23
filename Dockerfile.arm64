@@ -42,7 +42,7 @@ COPY shepherd shepherd.expect /
 RUN --mount=source=qemu-aarch64-static,target=/usr/bin/qemu-aarch64-static /shepherd.expect \
  # Use the full path to avoid a warning
  && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set augment_timezone:timeoffset=Auto \
- && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set shepherd:nolog:noautorefresh
+ && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set shepherd:output=output.xmltv:nolog:noautorefresh
 
 # Temporary fix for 10 SHAKE until it's updated in the source
 RUN --mount=source=qemu-aarch64-static,target=/usr/bin/qemu-aarch64-static sed -ri 's/10 Shake/10 SHAKE/' /home/shepherd/.shepherd/references/channel_list/channel_list /home/shepherd/.shepherd/channels.conf
