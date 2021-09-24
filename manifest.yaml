@@ -5,7 +5,7 @@ metadata:
 spec:
   storageClassName: nfs-client
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 100Mi
@@ -17,9 +17,8 @@ kind: CronJob
 metadata:
   name: shepherd
 spec:
-  schedule: "27 * * * *"
+  schedule: "0 * * * *"
   concurrencyPolicy: Forbid
-  suspend: false
   jobTemplate:
     spec:
       template:
@@ -39,5 +38,16 @@ spec:
               - mountPath: "/home/shepherd/.shepherd/shepherd.conf"
                 name: shepherd-pv-storage
                 subPath: shepherd.conf
+          initContainers:
+          - name: init-shepherd
+            image: willat8/shepherd
+            imagePullPolicy: Always
+            volumeMounts:
+              - mountPath: "/home/shepherd/pv"
+                name: shepherd-pv-storage
+            command:
+              - "/bin/sh"
+              - "-c"
+              - "touch /home/shepherd/pv/output.xmltv && test -f /home/shepherd/pv/shepherd.conf || cp /home/shepherd/.shepherd/shepherd.conf /home/shepherd/pv/shepherd.conf"
           restartPolicy: Never
 
