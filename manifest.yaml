@@ -48,6 +48,6 @@ spec:
             command:
               - "/bin/sh"
               - "-c"
-              - "touch /home/shepherd/pv/output.xmltv && test -f /home/shepherd/pv/shepherd.conf || cp /home/shepherd/.shepherd/shepherd.conf /home/shepherd/pv/shepherd.conf"
+              - "touch /home/shepherd/pv/output.xmltv && cp -n /home/shepherd/.shepherd/shepherd.conf /home/shepherd/pv/shepherd.conf"
           restartPolicy: Never
 
