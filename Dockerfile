@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1.3-labs
 FROM ubuntu:devel
 
-RUN --security=insecure apt-get update \
+RUN --mount=source=qemu-aarch64-static,target=/usr/bin/qemu-aarch64-static apt-get update \
  # As per https://github.com/ShephedProject/shepherd/wiki/Installation#PerlDependencies
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     gpg-agent software-properties-common \
@@ -31,7 +31,7 @@ RUN --security=insecure apt-get update \
     expect \
  && rm -rf /var/lib/apt/lists/*
 
-RUN groupadd shepherd \
+RUN --mount=source=qemu-aarch64-static,target=/usr/bin/qemu-aarch64-static groupadd shepherd \
  && useradd -g shepherd -m -s /bin/bash shepherd \
  && ln -sfv /usr/share/zoneinfo/Australia/Sydney /etc/localtime
 
@@ -39,13 +39,13 @@ USER shepherd
 
 COPY shepherd shepherd.expect /
 
-RUN --security=insecure /shepherd.expect \
+RUN --mount=source=qemu-aarch64-static,target=/usr/bin/qemu-aarch64-static /shepherd.expect \
  # Use the full path to avoid a warning
  && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set augment_timezone:timeoffset=Auto \
  && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set shepherd:output=output.xmltv:nolog:noautorefresh
 
 # Temporary fix for 10 SHAKE until it's updated in the source
-RUN sed -ri 's/10 Shake/10 SHAKE/' /home/shepherd/.shepherd/references/channel_list/channel_list /home/shepherd/.shepherd/channels.conf
+RUN --mount=source=qemu-aarch64-static,target=/usr/bin/qemu-aarch64-static sed -ri 's/10 Shake/10 SHAKE/' /home/shepherd/.shepherd/references/channel_list/channel_list /home/shepherd/.shepherd/channels.conf
 
 ENTRYPOINT ["/home/shepherd/.shepherd/applications/shepherd/shepherd"]
 
