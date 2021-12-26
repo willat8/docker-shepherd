@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: shepherd-pv-claim
 spec:
-  storageClassName: nfs-client
+  storageClassName: smb
   accessModes:
     - ReadWriteMany
   resources:
