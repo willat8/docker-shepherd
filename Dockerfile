@@ -31,8 +31,8 @@ RUN --mount=source=qemu-aarch64-static,target=/usr/bin/qemu-aarch64-static apt-g
     expect \
  && rm -rf /var/lib/apt/lists/*
 
-RUN --mount=source=qemu-aarch64-static,target=/usr/bin/qemu-aarch64-static groupadd shepherd \
- && useradd -g shepherd -m -s /bin/bash shepherd \
+RUN --mount=source=qemu-aarch64-static,target=/usr/bin/qemu-aarch64-static groupadd -g 999 shepherd \
+ && useradd -u 999 -g shepherd -m -s /bin/bash shepherd \
  && ln -sfv /usr/share/zoneinfo/Australia/Sydney /etc/localtime
 
 USER shepherd
