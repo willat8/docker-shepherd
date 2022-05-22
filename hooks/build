@@ -1,5 +1,5 @@
 #!/bin/bash
-
+jq --version
 curl -LO https://github.com/multiarch/qemu-user-static/releases/download/v6.1.0-5/qemu-aarch64-static
 chmod +x qemu-aarch64-static
 docker run --rm --privileged multiarch/qemu-user-static:register --reset
