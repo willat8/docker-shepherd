@@ -9,6 +9,4 @@ docker buildx build --platform linux/arm64 -f "${DOCKERFILE_PATH:-Dockerfile}" -
 
 docker buildx create --use --name amd64-builder
 docker buildx build --platform linux/amd64 --output "type=image,name=${DOCKER_REPO},push-by-digest=true,push=true" --iidfile iid.txt -f "${DOCKERFILE_PATH:-Dockerfile}" .
-echo "iidfile file follows"
-cat iid.txt
 
