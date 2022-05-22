@@ -1,5 +1,4 @@
 #!/bin/bash
 
-cat iid.txt
 docker buildx imagetools create --append -t "$IMAGE_NAME" "${DOCKER_REPO}@$(<iid.txt)"
 
