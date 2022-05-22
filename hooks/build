@@ -6,5 +6,6 @@ docker run --rm --privileged multiarch/qemu-user-static:register --reset
 
 docker buildx build --platform linux/arm64 -f "${DOCKERFILE_PATH:-Dockerfile}" -t "$IMAGE_NAME" .
 
+docker buildx create --use --name amd64-builder
 docker buildx build --platform linux/amd64 --output "type=image,name=${DOCKER_REPO},push-by-digest=true,push=true" --metadata-file md.txt -f "${DOCKERFILE_PATH:-Dockerfile}" .
 
