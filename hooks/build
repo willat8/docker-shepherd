@@ -8,5 +8,5 @@ docker buildx create --use --name arm64-builder --driver docker
 docker buildx build --platform linux/arm64 -f "${DOCKERFILE_PATH:-Dockerfile}" -t "$IMAGE_NAME" .
 
 docker buildx create --use --name amd64-builder
-docker buildx build --platform linux/amd64 --output "type=image,name=${DOCKER_REPO},push-by-digest=true,push=true" --iidfile iid.txt -f "${DOCKERFILE_PATH:-Dockerfile}" .
+docker buildx build --platform linux/amd64 --output "type=image,name=${DOCKER_REPO},push-by-digest=true,push=true" --metadata-file md.txt -f "${DOCKERFILE_PATH:-Dockerfile}" .
 
