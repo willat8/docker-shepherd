@@ -45,7 +45,7 @@ RUN --mount=source=qemu-aarch64-static,target=/usr/bin/qemu-aarch64-static /shep
  && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set shepherd:output=output.xmltv:nolog:noautorefresh
 
 # Temporary fix for 10 SHAKE and 9GemHD until it's updated in the source
-RUN --mount=source=qemu-aarch64-static,target=/usr/bin/qemu-aarch64-static sed -ri -e 's/10 Shake/10 SHAKE/' -e 's/9Gem HD/9GemHD/' /home/shepherd/.shepherd/references/channel_list/channel_list /home/shepherd/.shepherd/channels.conf
+RUN --mount=source=qemu-aarch64-static,target=/usr/bin/qemu-aarch64-static sed -ri -e 's/10 Shake/10 SHAKE/' /home/shepherd/.shepherd/references/channel_list/channel_list /home/shepherd/.shepherd/channels.conf
 
 ENTRYPOINT ["/home/shepherd/.shepherd/applications/shepherd/shepherd"]
 
