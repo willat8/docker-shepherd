@@ -1,6 +1,0 @@
-#!/bin/bash
-
-apt-get update && apt-get install -y jq
-
-docker buildx imagetools create --append -t "$IMAGE_NAME" "${DOCKER_REPO}@$(jq -r '."containerimage.digest"' md.txt)"
-
