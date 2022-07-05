@@ -29,7 +29,7 @@ spec:
                 claimName: shepherd-pv-claim
           containers:
           - name: shepherd
-            image: willat8/shepherd
+            image: australia-southeast1-docker.pkg.dev/cloud-wilhelm/registry/shepherd
             imagePullPolicy: Always
             volumeMounts:
               - mountPath: "/home/shepherd/.shepherd/output.xmltv"
@@ -40,7 +40,7 @@ spec:
                 subPath: shepherd.conf
           initContainers:
           - name: init-shepherd
-            image: willat8/shepherd
+            image: australia-southeast1-docker.pkg.dev/cloud-wilhelm/registry/shepherd
             imagePullPolicy: Always
             volumeMounts:
               - mountPath: "/home/shepherd/pv"
