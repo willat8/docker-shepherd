@@ -26,6 +26,8 @@ jobs:
         service_account: 'my-service-account@my-project.iam.gserviceaccount.com'
     - name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v0'
+    - name: 'Set up gcr'
+      run: 'gcloud auth configure-docker australia-southeast1-docker.pkg.dev'
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
     - name: Set up Docker Buildx
