@@ -38,4 +38,4 @@ jobs:
         context: .
         platforms: linux/amd64,linux/arm64
         push: true
-        tags: australia-southeast1-docker.pkg.dev/cloud-wilhelm/registry/docker-shepherd:latest
+        tags: australia-southeast1-docker.pkg.dev/cloud-wilhelm/registry/shepherd:latest
