@@ -39,7 +39,7 @@ RUN /shepherd.expect \
  && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set shepherd:output=output.xmltv:nolog:noautorefresh
 
 # Temporary fix for 10 SHAKE until it's updated in the source
-# Note G9em HD still broken. Using just 9Gem for now
+# Note 9Gem HD still broken so using just 9Gem for now
 RUN sed -ri 's/10 Shake/10 SHAKE/' /home/shepherd/.shepherd/references/channel_list/channel_list /home/shepherd/.shepherd/channels.conf
 
 ENTRYPOINT ["/home/shepherd/.shepherd/applications/shepherd/shepherd"]
