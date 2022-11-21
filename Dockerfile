@@ -1,7 +1,7 @@
 FROM ubuntu:devel
 
 RUN apt-get update \
- # As per https://github.com/ShephedProject/shepherd/wiki/Installation#PerlDependencies
+ # As per https://github.com/ShephedProject/shepherd/wiki/Installation#PerlDependencies, with additional libjson-maybexs-perl, libdbd-mysql-perl, liblocale-codesperl
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     libxml-simple-perl \
     libalgorithm-diff-perl \
@@ -38,7 +38,8 @@ RUN /shepherd.expect \
  && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set augment_timezone:timeoffset=Auto \
  && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set shepherd:output=output.xmltv:nolog:noautorefresh
 
-# Temporary fix for 10 SHAKE and 9GemHD until it's updated in the source
+# Temporary fix for 10 SHAKE until it's updated in the source
+# Note G9em HD still broken. Using just 9Gem for now
 RUN sed -ri 's/10 Shake/10 SHAKE/' /home/shepherd/.shepherd/references/channel_list/channel_list /home/shepherd/.shepherd/channels.conf
 
 ENTRYPOINT ["/home/shepherd/.shepherd/applications/shepherd/shepherd"]
