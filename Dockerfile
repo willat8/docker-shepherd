@@ -1,7 +1,7 @@
 FROM ubuntu:devel
 
 RUN apt-get update \
- # As per https://github.com/ShephedProject/shepherd/wiki/Installation#PerlDependencies, with additional libjson-maybexs-perl, libdbd-mysql-perl, liblocale-codesperl
+ # As per https://github.com/ShephedProject/shepherd/wiki/Installation#PerlDependencies, with additional libjson-maybexs-perl, libdbd-mysql-perl, liblocale-codes-perl
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     libxml-simple-perl \
     libalgorithm-diff-perl \
