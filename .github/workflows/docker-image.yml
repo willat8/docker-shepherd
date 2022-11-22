@@ -37,6 +37,6 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: .
-        platforms: linux/amd64,linux/arm64
+        platforms: linux/arm64
         push: true
         tags: australia-southeast1-docker.pkg.dev/cloud-wilhelm/registry/shepherd:latest
