@@ -1,27 +1,26 @@
 FROM ubuntu:devel
 
 RUN apt-get update \
- # As per https://github.com/ShephedProject/shepherd/wiki/Installation#PerlDependencies, with additional libjson-maybexs-perl, libdbd-mysql-perl, liblocale-codes-perl
+ # As per https://github.com/ShephedProject/shepherd/wiki/Installation#PerlDependencies
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     libxml-simple-perl \
     libalgorithm-diff-perl \
+    liblocale-codes-perl \
     libdata-dumper-simple-perl \
     libdate-manip-perl \
+    libobject-tiny-perl \
     liblist-compare-perl \
     libdatetime-format-strptime-perl \
     libhtml-parser-perl \
     libxml-dom-perl \
-    libgd-gd2-perl \
     libarchive-zip-perl \
     libio-string-perl \
     xmltv \
     libdbi-perl \
+    libdbd-mysql-perl \
     libsort-versions-perl \
     libjson-perl \
-    libobject-tiny-perl \
-    libjson-maybexs-perl \
-    libdbd-mysql-perl \
-    liblocale-codes-perl \
+    libjson-xs-perl \
     expect \
  && rm -rf /var/lib/apt/lists/*
 
