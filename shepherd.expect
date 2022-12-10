@@ -12,13 +12,13 @@ expect {
   # Move on once at the next question after channel selection
   -re {(?n)^Do you wish to include PayTV .*} { send "no\n" }
 
-  -re {"10 Bold" \(new\).*} { send "\n" ; exp_continue }
+  -re {"10 BOLD" \(new\).*} { send "\n" ; exp_continue }
   -re {"10 HD" \(new\).*} { send "\n" ; exp_continue }
   -re {"10 Peach" \(new\).*} { send "\n" ; exp_continue }
-  -re {"10 Shake" \(new\).*} { send "\n" ; exp_continue }
+  -re {"10 SHAKE" \(new\).*} { send "\n" ; exp_continue }
   -re {"7flix" \(new\).*} { send "\n" ; exp_continue }
   -re {"7HD" \(new\).*} { send "\n" ; exp_continue }
-  -re {"7mate" \(new\).*} { send "\n" ; exp_continue }
+  -re {"7mate HD" \(new\).*} { send "\n" ; exp_continue }
   -re {"7TWO" \(new\).*} { send "\n" ; exp_continue }
   -re {"9Gem HD" \(new\).*} { send "\n" ; exp_continue }
   -re {"9Go!" \(new\).*} { send "\n" ; exp_continue }
