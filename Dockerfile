@@ -37,5 +37,7 @@ RUN /shepherd.expect \
  && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set augment_timezone:timeoffset=Auto \
  && /home/shepherd/.shepherd/applications/shepherd/shepherd --component-set shepherd:output=output.xmltv:nolog:noautorefresh
 
+# Note 9Gem HD still broken so using just 9Gem for now
+
 ENTRYPOINT ["/home/shepherd/.shepherd/applications/shepherd/shepherd"]
 
