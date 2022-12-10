@@ -20,7 +20,7 @@ expect {
   -re {"7HD" \(new\).*} { send "\n" ; exp_continue }
   -re {"7mate" \(new\).*} { send "\n" ; exp_continue }
   -re {"7TWO" \(new\).*} { send "\n" ; exp_continue }
-  -re {"9Gem" \(new\).*} { send "\n" ; exp_continue }
+  -re {"9Gem HD" \(new\).*} { send "\n" ; exp_continue }
   -re {"9Go!" \(new\).*} { send "\n" ; exp_continue }
   -re {"9HD" \(new\).*} { send "\n" ; exp_continue }
   -re {"9Life" \(new\).*} { send "\n" ; exp_continue }
