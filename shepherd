@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 our $progname = 'shepherd';
-my $version = '1.9.14';
+my $version = '1.9.18';
 
 # tv_grab_au
 # "Shepherd"
@@ -553,7 +553,7 @@ sub install
 
     # have we previously downloaded it but haven't been able to install it
     # (due to a failed test or failed dependencies or something like that)?
-    if ((-e "$newfile") && (-s "$newfile") && (defined $components_pending_install->{$proggy})) {
+    if ((-e "$newfile") && (-s "$newfile") && (defined $components_pending_install->{$proggy}) && csum_file($newfile) eq $csum2) {
 	&log("Appear to have previously downloaded $proggy v$latestversion.\n");
 	$config = Data::Dumper->Dump([$components_pending_install->{$proggy}->{config}], ["config"]);
     } else {
@@ -908,25 +908,24 @@ sub no_data
 # Report any pending stats to main server.
 sub report_stats
 {
-#    my $postvars = build_stats();
-#    return unless $postvars;
-#
-#    if ($opt->{nonotify} or $opt->{dontcallgrabbers})
-#    {
-#	&log("Not posting usage statistics due to --" . ($opt->{nonotify} ? 'nonotify' : 'dontcallgrabbers' ) . " option.\n");
-#	&log("Would have posted: ".Dumper($pending_messages)) if ($debug);
-#    }
-#    else
-#    {
-#	&log("Posting anonymous usage statistics.\n");
-#	return 0 unless (fetch_file("http://www.whuffy.com/report.cgi", undef, 1, $postvars));
-#    }
+    my $postvars = build_stats();
+    return unless $postvars;
+
+    if ($opt->{nonotify} or $opt->{dontcallgrabbers})
+    {
+	&log("Not posting usage statistics due to --" . ($opt->{nonotify} ? 'nonotify' : 'dontcallgrabbers' ) . " option.\n");
+	&log("Would have posted: ".Dumper($pending_messages)) if ($debug);
+    }
+    else
+    {
+	&log("Posting anonymous usage statistics.\n");
+	return 0 unless (fetch_file("https://shepherd.victory.id.au/report", undef, 1, $postvars));
+    }
 
     # successful post, clear out our pending messages
     $pending_messages = undef;
 
-#    return 1; # made changes
-	return 0;
+    return 1; # made changes
 }
 
 # gather pending messages
@@ -1518,7 +1517,8 @@ sub query_component_type
     foreach (keys %$components)
     {
 	if ($components->{$_}->{type} and $components->{$_}->{type} eq $progtype) {
-	    if (defined $conf) {
+	    next if ($_ eq 'yahoo7widget');
+		if (defined $conf) {
 		push (@ret, $_) if (query_config($_,$conf) eq $val);
 	    } else {
 		push (@ret, $_);
@@ -4450,7 +4450,7 @@ sub soak_up_data
 	    $this_plugin->{valid} = 0;
 	    $components_used .= '[failed_unparseable]';
 	    $this_plugin->{failure_reason} = 
-		sprintf "Unparseable: %d ch, %d shows, %d dur, %d slots, %d invalid_date, %d too_long, %d too_short, %d outside_window, %d unknown_channel, %d optional",
+		sprintf "Unparseable: %d ch, %d shows, %d dur, %d slots, %d invalid_date, %d too_long, %d too_short, %d outside_window, %d unknown_channel, %d optional, earliest_seen: %d, latest_seen: %d, policy_start: %d, policy_end: %d",
 		    $seen_channels_with_data, 
 		    $this_plugin->{programmes},
 		    $this_plugin->{total_duration},
@@ -4460,7 +4460,12 @@ sub soak_up_data
 		    $this_plugin->{progs_too_short},
 		    $this_plugin->{progs_outside_window},
 		    $this_plugin->{progs_with_unknown_channel},
-		    $this_plugin->{progs_optional};
+		    $this_plugin->{progs_optional},
+			$this_plugin->{earliest_data_seen},
+			$this_plugin->{latest_data_seen},
+			$policy{starttime},
+			$policy{endtime}
+		;
 	}
     }
 
@@ -5395,4 +5400,3 @@ sub socks_new_socket
 
 # For self-locking
 __DATA__
-
