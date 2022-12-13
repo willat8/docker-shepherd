@@ -5400,3 +5400,4 @@ sub socks_new_socket
 
 # For self-locking
 __DATA__
+
