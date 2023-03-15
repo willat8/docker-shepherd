@@ -21,7 +21,6 @@ RUN apt-get update \
     libsort-versions-perl \
     libjson-perl \
     libjson-xs-perl \
-    libnet-ssleay-perl \
     expect \
  && rm -rf /var/lib/apt/lists/*
 
