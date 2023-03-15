@@ -23,7 +23,7 @@ RUN apt-get update \
     libjson-xs-perl \
     expect \
  && rm -rf /var/lib/apt/lists/*
-
+RUN cat /etc/ssl/openssl.cnf
 RUN groupadd -g 999 shepherd \
  && useradd -u 999 -g shepherd -m -s /bin/bash shepherd \
  && ln -sfv /usr/share/zoneinfo/Australia/Sydney /etc/localtime
