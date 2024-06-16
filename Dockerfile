@@ -1,4 +1,4 @@
-FROM ubuntu:mantic
+FROM ubuntu:noble
 
 RUN apt-get update \
  # As per https://github.com/ShephedProject/shepherd/wiki/Installation#PerlDependencies
